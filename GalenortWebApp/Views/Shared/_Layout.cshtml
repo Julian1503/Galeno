@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Galenort</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @Html.ActionLink("Galenort", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item">@Html.ActionLink("¿Quiénes Somos?", "Index", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Centro de Atención", "CentroAtencion", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Planes", "Planes", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Afiliados", "Afiliado", "Home", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Contactanos", "Contact", "Home", null, new { @class = "nav-link" })</li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <!-- Footer -->
+        <footer class="page-footer font-small blue pt-4">
+
+            <div class="container-fluid text-center text-md-left">
+
+                <div class="row">
+                    <div class="col-md-6 mt-md-0 mt-3">
+                        <h5 class="text-uppercase">Galenort</h5>
+                        <p>0381-4219000 o 0381-4304101</p>
+                    </div>
+
+                    <hr class="clearfix w-100 d-md-none pb-3">
+
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <h5 class="text-uppercase">Establecimientos</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <p>Sanatorio Galeno</p>
+                            </li>
+                            <li>
+                                <p>Sanatorio C.I.M.S.A</p>
+
+                            </li>
+                            <li>
+                                <p>Sanatorio Central</p>
+
+                            </li>
+                            <li>
+                                <p>Sanatorio Mitre</p>
+
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="col-md-3 mb-md-0 mb-3">
+
+                        <h5 class="text-uppercase">Dirección</h5>
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <p> Av. Belgrano 2970 - 381 4331949</p>
+                            </li>
+                            <li>
+                                <p> Jujuy 111 - 381 4220662 </p>
+                            </li>
+                            <li>
+                                <p> Av. Mitre 268 - 381 4227971 </p>
+                            </li>
+                            <li>
+                                <p> Av. Mitre 273 - 3865 481338 </p>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="footer-copyright text-center py-3">
+                <p>&copy; @DateTime.Now.Year Galenort - All Rights Reserved </p>
+            </div>
+    
+        </footer>
+
+
+
+
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>
