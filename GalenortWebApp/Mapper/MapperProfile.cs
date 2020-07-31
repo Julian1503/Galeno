@@ -16,21 +16,16 @@ namespace GalenortWebApp.Mapper
     {
         public MapperProfile()
         {
-            CreateMap<DiaModel, DiaDto>().ReverseMap();
-            CreateMap<PrestadorModel, PrestadorDto>().ReverseMap();
-            CreateMap<EstablecimientoModel, EstablecimientoDto>().ReverseMap().ForMember(x => x.Localidad, y => y.MapFrom(z => z.Localidad.Descripcion));
-            CreateMap<EspecialidadModel, EspecialidadDto>().ReverseMap();
-            CreateMap<HorarioPrestadorModel, HorarioPrestadorDto>()
+            CreateMap<PrestadorViewModel, PrestadorDto>().ReverseMap();
+            CreateMap<EstablecimientoViewModel, EstablecimientoDto>().ReverseMap().ForMember(x => x.Localidad, y => y.MapFrom(z => z.Localidad.Descripcion));
+            CreateMap<EspecialidadViewModel, EspecialidadDto>().ReverseMap();
+            CreateMap<HorarioPrestadorViewModel, HorarioPrestadorDto>()
                 .ReverseMap()
-                .ForMember(x => x.Dias, y => y.MapFrom(z => z.DiaHorarios.Select(q => q.Dia.Descripcion)))
+                .ForMember(x => x.Dias, y => y.MapFrom(z => z.Dias))
                 .ForMember(x => x.Prestador, y => y.MapFrom(z => z.PrestadorEstablecimiento.PrestadorEspecialidad.Prestador.ApYNom))
                 .ForMember(x => x.Especialidad, y => y.MapFrom(z => z.PrestadorEstablecimiento.PrestadorEspecialidad.Especialidad.Descripcion))
-                .ForMember(x => x.Establecimiento, y => y.MapFrom(z => z.PrestadorEstablecimiento.Establecimiento));
-
-            CreateMap<PrestadorEstablecimientoModel, PrestadorEstablecimientoDto>().ReverseMap();
-            CreateMap<PrestadorEspecialidadModel, PrestadorEspecialidadDto>().ReverseMap();
-            CreateMap<DiaHorarioModel, DiaHorarioDto>().ReverseMap();
-            CreateMap<DiaModel, DiaDto>();
+                .ForMember(x=>x.Establecimiento,y=>y.MapFrom(z=>z.PrestadorEstablecimiento.Establecimiento.RazonSocialDireccion))
+                .ForMember(x => x.Horario, y => y.MapFrom(z => z.Horario));
         }
     }
 }

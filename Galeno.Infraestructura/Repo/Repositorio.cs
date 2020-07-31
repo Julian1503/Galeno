@@ -31,7 +31,8 @@ namespace Galeno.Dominio.Repositorio
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine("Error occurred.");
+                        Console.WriteLine($"Error occurred: {ex}");
+
                         return 0;
                     }
                 }
@@ -70,7 +71,8 @@ namespace Galeno.Dominio.Repositorio
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine("Error occurred.");
+                        Console.WriteLine($"Error occurred: {ex}");
+
                     }
                 }
             }
@@ -152,7 +154,7 @@ namespace Galeno.Dominio.Repositorio
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        Console.WriteLine("Error occurred.");
+                        Console.WriteLine($"Error occurred: {ex}");
                     }
                 }
             }

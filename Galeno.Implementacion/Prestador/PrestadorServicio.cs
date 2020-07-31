@@ -1,10 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using Galeno.AutoMapper;
 using Galeno.Dominio.Base;
 using Galeno.Interces.Prestador;
 using Galeno.Interces.Prestador.DTOs;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Galeno.Dominio.Extension;
 
 namespace Galenort.Implementacion.Prestador
 {
@@ -25,9 +29,18 @@ namespace Galenort.Implementacion.Prestador
             return _mapper.Map<PrestadorDto>(prestador);
         }
 
+        public async Task<IEnumerable<PrestadorDto>> GetByFilter(string cadena)
+        {
+            Expression<Func<Galeno.Dominio.Entidades.Prestador, bool>> exp = x => true;
+            exp = exp.Or(x => x.Apellido.Contains(cadena));
+            exp = exp.Or(x => x.Nombre.Contains(cadena));
+            var result = await _repositorio.GetByFilter(exp,orderBy:x=>x.OrderBy(y=>y.Apellido).ThenBy(y=>y.Nombre));
+            return _mapper.Map<IEnumerable<PrestadorDto>>(result);
+        }
+
         public async Task<IEnumerable<PrestadorDto>> GetAll()
         {
-            var result = await _repositorio.GetAll();
+            var result = await _repositorio.GetAll(orderBy: x => x.OrderBy(y => y.Apellido).ThenBy(y => y.Nombre));
             return _mapper.Map<IEnumerable<PrestadorDto>>(result);
         }
 

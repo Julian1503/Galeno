@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Galeno.AutoMapper;
 using Galeno.Dominio.Base;
+using Galeno.Dominio.Extension;
 using Galeno.Interces.Establecimiento;
 using Galeno.Interces.Establecimiento.DTOs;
 
@@ -35,6 +37,14 @@ namespace Galenort.Implementacion.Establecimiento
             await _repositorio.Delete(id);
         }
 
+        public async Task<IEnumerable<EstablecimientoDto>> GetByFilter(string cadena)
+        {
+            Expression<Func<Galeno.Dominio.Entidades.Establecimiento, bool>> exp = x => true;
+            exp = exp.And(x => x.RazonSocial.Contains(cadena));
+            var result = await _repositorio.GetByFilter(exp, orderBy: x => x.OrderBy(y => y.RazonSocial));
+            return _mapper.Map<IEnumerable<EstablecimientoDto>>(result);
+        }
+
         public async Task Update(EstablecimientoDto establecimiento, long id)
         {
             var _establecimiento = _mapper.Map<Galeno.Dominio.Entidades.Establecimiento>(establecimiento);
@@ -50,7 +60,7 @@ namespace Galenort.Implementacion.Establecimiento
 
     public async Task<IEnumerable<EstablecimientoDto>> ObtenerTodos()
         {
-            var result = await _repositorio.GetAll();
+            var result = await _repositorio.GetAll(orderBy: x => x.OrderBy(y => y.RazonSocial));
             return _mapper.Map<IEnumerable<EstablecimientoDto>>(result);
         }
     }

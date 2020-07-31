@@ -12,21 +12,19 @@ namespace GalenortWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private IHorarioPrestadorServicio _prestador;
+        private IHorarioPrestadorServicio _horario;
         private IMapper _mapper;
 
-        public HomeController(IHorarioPrestadorServicio prestador)
+        public HomeController(IHorarioPrestadorServicio horario)
         {
-            _prestador = prestador;
+            _horario = horario;
             var config = new MapperConfiguration(x => x.AddProfile(new MapperProfile()));
             _mapper = config.CreateMapper();
         }
 
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var a = await _prestador.ObtenerPorFiltro(1,0,0);
-            var b = _mapper.Map<IEnumerable<HorarioPrestadorModel>>(a);
             return View();
         }
         public ActionResult About()
@@ -35,29 +33,37 @@ namespace GalenortWebApp.Controllers
             return View();
         }
 
-        //public async Task<ActionResult> CentroAtencion(string prestador, int? page, string cadenaBuscar, string establecimientoBuscar)
-        //{
-        //    var pageNumber = (page ?? 1);
+        public async Task<ActionResult> CentroAtencion()
+        {
+            
+            var horarios = _mapper.Map<IEnumerable<HorarioPrestadorViewModel>>(await _horario.ObtenerTodos());
 
-        //    ViewBag.FilterValue = cadenaBuscar;
+            return View(horarios);
 
-        //   var _prestador = await _prestadorServicio.Obtener(prestador, cadenaBuscar, establecimientoBuscar);
 
-        //    return View(new CentroAtencionViewModel
-        //    {
+            //var pageNumber = (page ?? 1);
 
-        //        Centros = await _prestador
-        //            .OrderByDescending(x => x.FechaDesde)
-        //            .Select(s => new CentroAtencionViewModel
-        //            {
-        //                CentroAtencionId = s.Id,
-        //                Prestador = s.Prestador,
-        //                Horario = s.Horario.ToShortDateString(),
-        //                Dias = s.Dias.ToShortDateString(),
-        //                Establecimiento = s.Establecimiento,
-        //            }).ToPagedListAsync(pageNumber, 10)
-        //    });
-        //}
+            //ViewBag.FilterValue = cadenaBuscar;
+
+            //var _prestador = await _prestadorServicio.Obtener(prestador, cadenaBuscar, establecimientoBuscar);
+
+            //return View(new CentroAtencionViewModel
+            //{
+
+            //    Centros = await _prestador
+            //        .OrderByDescending(x => x.FechaDesde)
+            //        .Select(s => new CentroAtencionViewModel
+            //        {
+            //            CentroAtencionId = s.Id,
+            //            Prestador = s.Prestador,
+            //            Horario = s.Horario.ToShortDateString(),
+            //            Dias = s.Dias.ToShortDateString(),
+            //            Establecimiento = s.Establecimiento,
+            //        }).ToPagedListAsync(pageNumber, 10)
+            //});
+
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

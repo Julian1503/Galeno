@@ -178,7 +178,7 @@ namespace Galeno.Infraestructura.Migrations
                 {
                     Id = 1,
                     IdLocalidad = 1,
-                    Direccion = "Avenida Belgrano 2970",
+                    Direccion = "Av. Belgrano 2970",
                     RazonSocial = "Sanatorio Galeno S.C.E.I"
                 },
                 new Establecimiento
@@ -192,14 +192,14 @@ namespace Galeno.Infraestructura.Migrations
                 {
                     Id = 3,
                     IdLocalidad = 1,
-                    Direccion = "Avenida Mitre 268",
+                    Direccion = "Av. Mitre 268",
                     RazonSocial = "Sanatorio Central S.R.L"
                 },
                 new Establecimiento
                 {
                     Id = 4,
                     IdLocalidad = 2,
-                    Direccion = "Avenida Mitre 263",
+                    Direccion = "Av. Mitre 263",
                     RazonSocial = "Sanatorio Mitre S.R.L"
                 },
             };

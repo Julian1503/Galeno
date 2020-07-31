@@ -24,7 +24,7 @@ namespace Galeno.IoC
 {
    public static class Injection 
     {
-        public static void InyectorDepenendencias(UnityContainer container)
+        public static void InyectorDepenendencias(IUnityContainer container)
         {
             container.RegisterType<IEspecialidadServicio, EspecialidadServicio>();
             container.RegisterType<IRepositorio<Especialidad>, Repositorio<Especialidad>>();

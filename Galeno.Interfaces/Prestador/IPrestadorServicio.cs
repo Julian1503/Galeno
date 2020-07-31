@@ -10,6 +10,7 @@ namespace Galeno.Interces.Prestador
     {
         Task<IEnumerable<PrestadorDto>> GetAll();
        Task<PrestadorDto> GetById(long id);
+       Task<IEnumerable<PrestadorDto>> GetByFilter(string cadena);
        Task<long> Create(PrestadorDto prestador);
         Task Delete(long id);
         Task Update(PrestadorDto prestador,long id);

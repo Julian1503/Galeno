@@ -28,7 +28,7 @@ namespace Galenort.Implementacion.HorarioPrestador
 
         public async Task<IEnumerable<HorarioPrestadorDto>> ObtenerTodos()
         {
-            var result = await _repositorio.GetAll(null,
+            var result = await _repositorio.GetAll(x=>x.OrderBy(y=>y.HoraInicio),
                 x => x.Include(y => y.PrestadorEstablecimiento.Establecimiento)
                     .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Especialidad)
                     .Include(y => y.PrestadorEstablecimiento.Establecimiento.Localidad)
@@ -58,7 +58,7 @@ namespace Galenort.Implementacion.HorarioPrestador
                 exp = exp.And(x => x.PrestadorEstablecimiento.PrestadorEspecialidad.IdEspecialidad == especialidadId);
             }
 
-            var result = await _repositorio.GetByFilter(exp, null,
+            var result = await _repositorio.GetByFilter(exp, x => x.OrderBy(y => y.HoraInicio),
             x => x.Include(y => y.PrestadorEstablecimiento.Establecimiento)
                 .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Especialidad)
                 .Include(y => y.PrestadorEstablecimiento.Establecimiento.Localidad)

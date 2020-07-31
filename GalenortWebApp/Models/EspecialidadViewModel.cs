@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GalenortWebApp.Models
 {
-    public class EspecialidadModel
+    public class EspecialidadViewModel
     {
         public long Id { get; set; }
         public string Descripcion { get; set; }

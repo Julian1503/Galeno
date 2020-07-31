@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace GalenortWebApp.Models
 {
-    public class PrestadorModel
+    public class EstablecimientoViewModel
     {
         public long Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-
+        public string RazonSocial { get; set; }
+        public string Direccion { get; set; }
+        public string Localidad { get; set; }
     }
 }

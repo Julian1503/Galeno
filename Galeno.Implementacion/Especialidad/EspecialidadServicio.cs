@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Galeno.AutoMapper;
 using Galeno.Dominio.Base;
+using Galeno.Dominio.Extension;
 using Galeno.Interces.Especialidad;
 using Galeno.Interces.Especialidad.DTOs;
 
@@ -24,9 +26,17 @@ namespace Galenort.Implementacion.Especialidad
             _mapper = config.CreateMapper();
         }
 
+        public async Task<IEnumerable<EspecialidadDto>> GetByFilter(string cadena)
+        {
+            Expression<Func<Galeno.Dominio.Entidades.Especialidad, bool>> exp = x => true;
+            exp = exp.And(x => x.Descripcion.Contains(cadena));
+            var result = await _repositorio.GetByFilter(exp, orderBy: x => x.OrderBy(y => y.Descripcion));
+            return _mapper.Map<IEnumerable<EspecialidadDto>>(result);
+        }
+
         public async Task<IEnumerable<EspecialidadDto>> ObtenerTodos()
         {
-            var result = await _repositorio.GetAll();
+            var result = await _repositorio.GetAll(orderBy:x=>x.OrderBy(y=>y.Descripcion));
             return _mapper.Map<IEnumerable<EspecialidadDto>>(result);
         }
 

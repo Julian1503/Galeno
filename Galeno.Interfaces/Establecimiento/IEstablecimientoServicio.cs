@@ -10,6 +10,7 @@ namespace Galeno.Interces.Establecimiento
    {
        Task<IEnumerable<EstablecimientoDto>> ObtenerTodos();
        Task<EstablecimientoDto> GetById(long id);
+       Task<IEnumerable<EstablecimientoDto>> GetByFilter(string cadena);
        Task Create(EstablecimientoDto establecimiento);
        Task Delete(long id);
        Task Update(EstablecimientoDto establecimiento,long id);
