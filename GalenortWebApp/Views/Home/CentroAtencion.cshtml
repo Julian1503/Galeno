@@ -63,16 +63,20 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+    @if(Model!=null)
+    {
+        foreach (var item in Model)
         {
-        <tr>
-            <td nowrap="nowrap"> @Html.DisplayFor(modelItem => item.Horario)</td>
-            <td> @Html.DisplayFor(modelItem => item.Dias)</td>
-            <td> @Html.DisplayFor(modelItem => item.Establecimiento)</td>
-            <td> @Html.DisplayFor(modelItem => item.Prestador)</td>
-            <td> @Html.DisplayFor(modelItem => item.Especialidad)</td>
-        </tr>
-        }
+             <tr>
+                 <td nowrap="nowrap"> @Html.DisplayFor(modelItem => item.Horario)</td>
+                 <td> @Html.DisplayFor(modelItem => item.Dias)</td>
+                 <td> @Html.DisplayFor(modelItem => item.Establecimiento)</td>
+                 <td> @Html.DisplayFor(modelItem => item.Prestador)</td>
+                 <td> @Html.DisplayFor(modelItem => item.Especialidad)</td>
+             </tr>
+         }
+   
+    }
     </tbody>
 </table>
 

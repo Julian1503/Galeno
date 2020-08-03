@@ -28,15 +28,23 @@ namespace Galenort.Implementacion.HorarioPrestador
 
         public async Task<IEnumerable<HorarioPrestadorDto>> ObtenerTodos()
         {
-            var result = await _repositorio.GetAll(x=>x.OrderBy(y=>y.HoraInicio),
-                x => x.Include(y => y.PrestadorEstablecimiento.Establecimiento)
-                    .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Especialidad)
-                    .Include(y => y.PrestadorEstablecimiento.Establecimiento.Localidad)
-                    .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Prestador)
-                    .Include(y => y.DiaHorarios)
-                    .Include(y => y.DiaHorarios.Select(z => z.Dia))
+            try
+            {
+                var result = await _repositorio.GetAll(x => x.OrderBy(y => y.HoraInicio),
+                    x => x.Include(y => y.PrestadorEstablecimiento.Establecimiento)
+                        .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Especialidad)
+                        .Include(y => y.PrestadorEstablecimiento.Establecimiento.Localidad)
+                        .Include(y => y.PrestadorEstablecimiento.PrestadorEspecialidad.Prestador)
+                        .Include(y => y.DiaHorarios)
+                        .Include(y => y.DiaHorarios.Select(z => z.Dia))
                 );
-            return _mapper.Map<IEnumerable<HorarioPrestadorDto>>(result);
+                return _mapper.Map<IEnumerable<HorarioPrestadorDto>>(result);
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
+        
         }
 
         public async Task<IEnumerable<HorarioPrestadorDto>> ObtenerPorFiltro(long profesionalId, long establecimientoId, long especialidadId)
